@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>移动端长按事件</title>
+	<style>
+		html,body { font-size: 62.5%; font-family: Microsoft Yahei,Simsun; }
+		body { margin: 0; background: #fff; text-align:center; }
+		.title { font-size: 4rem; }
+		.longPress { width: 80%; height: 80px; margin: 50px auto; background:#ddd; line-height:80px; font-size: 3rem; }
+	</style>
+</head>
+<body>
+	<h3 class="title">移动端长按事件</h3>
+	<div class="longPress">长按我试试</div>
+
+	<script src="js/zepto.min.js"></script>
+	<script>
+	$.fn.longpress = function(fn){
+		var time = null;
+		var ths = this;
+
+		for(var i=0; i<ths.length; i++){
+			ths[i].addEventListener('touchstart', function(event){
+				time = setTimeout(fn, 800);
+			}, false)
+			ths[i].addEventListener('touchend', function(event){
+				clearTimeout(time);
+			}, false)
+		}
+	}
+
+	$('.longPress').longpress(function(){
+		alert(1)
+	})
+	</script>
+</body>
+</html>
